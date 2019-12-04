@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {sortDesc, sortAsc, getSortedMovies} from '../helpers'
+import Logo from '../assets/logo2.png'
 
 
 class Landing extends Component{
   constructor(props){
     super(props);
     this.state={      
-      movies: this.props.movies,
-      selectedMovie:this.props.selectedMovie,
-      characters: this.props.characters,
+      movies: [],
+      selectedMovie:[],
+      characters: [],
       sortOrder: "",
       sortedColumn:"",     
     }
-  }
-
-
-  componentDidUpdate(){    
-    console.log("cyharacters"+this.props.characters);
-    console.log(this.props.charactersLoaded);
-   
   }
 
   selectMovie=(e)=>{    
@@ -70,16 +64,29 @@ class Landing extends Component{
     </tr>    
    )   
     return (	
-      <div> 
-        <h1>{this.state.selectedMovie.title}</h1>
-        <select onChange={this.selectMovie} value="Select"> 
-          <option value="Select" >Select a Movie</option>    
-          {options}
-        </select>
-        {this.state.selectedMovie.title}
+      <div className="Landing">
+
+        <div className="container-fluid page-header">       
+          <div className="row">
+            <div className="col-sm-12 col-md-6 left-header-column">
+            <img src={Logo} alt="star-wars-logo" width="170" height="68" />
+            </div> 
+
+            <div className="col-sm-12 col-md-6 right-header-column">
+              <div className="select-box" >
+                <select onChange={this.selectMovie} value="Select" > 
+                  <option value="Select" >Select a Movie</option>  
+                  {options}         
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
         
-        {/* <button onClick={this.click}>show</button> */}
-        <table >
+        <h1>{this.state.selectedMovie.title}</h1>        
+        
+        <table className="d-flex justify-content-center">
           <thead>
             <tr>
               <th onClick={this.sortTable}>Name</th>
@@ -87,8 +94,7 @@ class Landing extends Component{
               <th onClick={this.sortTable}>Height</th>
             </tr>
             <tr>
-              <td>Total Character{this.state.characters.length}</td>
-              
+              <td>Total Character{this.state.characters.length}</td>                
             </tr>
           </thead>
           <tbody>               

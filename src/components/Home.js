@@ -13,7 +13,7 @@ class Home extends Component{
       selectedMovie:[],
       characters:[],
       closed: false,
-      charactersLoaded: false    
+      charactersLoaded: true   
     }
   }
   
@@ -61,7 +61,7 @@ class Home extends Component{
       <div className="Home">        
         <div id="pageOne" className={`${this.state.closed ? "closed":"open"}`}>
           <div className="logo"><img src={Logo} alt="star-wars-logo" /></div>
-          <div class="select-box" >
+          <div className="select-box select-input-container" >
             <select onChange={this.selectMovie} value="Select" > 
               <option value="Select" >Select a Movie</option>  
               {options}         

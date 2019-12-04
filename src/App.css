@@ -4,6 +4,10 @@
   height: 100vh
 }
 
+.Landing{
+  width: 100% 
+}
+
 #pageOne {
   height: 100vh;
   max-height: 100vh;
@@ -60,23 +64,55 @@
   margin: 200px 0px 0px 0px;
 }
 
-.select-box {
-  padding-top: 20px;
-  position: relative;
-  margin-top: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.select-box { 
   background-color: black;
   border: 0
 }
 
+.select-input-container{
+  padding-top: 18px;
+  margin-top: 32px;
+}
+
 .select-box select {
-  outline: none;
+  outline: none;  
   color: #d6be65;
   background: transparent;
   padding: 7px 50px 7px 8px;
   background: rgba(0, 0, 0, 1);
   border: 1px solid #ebcd24;
   border-radius: 2px;
+}
+
+.left-header-column{
+  text-align: left
+}
+
+.right-header-column{
+  text-align: right;
+  padding-right: 20px
+}
+
+.page-header{
+  padding-top: 50px 
+}
+
+table{
+  margin: 20px 20px;
+  border: 1px solid #ebcd24; 
+}
+
+/* table th{
+  width: 20%
+} */
+
+@media (max-width: 991px) { 
+  .left-header-column{
+    text-align: center
+  }
+  
+  .right-header-column{
+    text-align: center;
+    padding: 20px 20px 
+  }
 }
