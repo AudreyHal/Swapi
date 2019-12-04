@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import {sortDesc, sortAsc} from '../helpers'
 
 
 class Landing extends Component{
@@ -52,52 +53,23 @@ class Landing extends Component{
     )
   }
 
-  sort = (e) => {
-    let characters = this.state.characters;
+  sortTable = (e) => {
     let column = e.target.innerHTML.toLowerCase();
-    if (this.state.sortOrder === "asc" && this.state.sortedColumn === column) {
-      let desc_characters = characters.reverse();
-      this.setState({
-        characters: desc_characters
-      });
-    } else {
-      
-      this.setState({
-        sortOrder: "asc",
-        sortedColumn: column
-      });
+    let characters = this.state.characters;    
+    let sortOrder=this.state.sortOrder;
+    let sortedColumn=this.state.sortedColumn;
+    let sorted_characters;
 
-      if (column === "height") {
-        characters.sort(function (a, b) {
-          let A = parseInt(a.height);
-          let B = parseInt(b.height);
-          return (A < B ? -1 : 0)
-          return (A > B ? 1 : 0)
-        });
-      } else {
-        characters.sort(function (a, b) {
-          let A = a[column].toUpperCase();
-          let B = b[column].toUpperCase();
-          return (A < B ? -1 : 0)
-          return (A > B ? 1 : 0)
-        });
-      }
+    if (sortOrder === "asc" && sortedColumn === column) {
+      sorted_characters= sortDesc(characters, column, sortOrder, sortedColumn)
     }
-    this.setState({
-      characters: characters
-    })
-    console.log(characters);
-  }
+    else {      
+      this.setState({ sortOrder: "asc", sortedColumn: column});
+      sorted_characters= sortAsc(characters, column, sortOrder, sortedColumn)
+    }
+    this.setState({ characters: sorted_characters });   
+  } 
 
-  click=()=>{
-    console.log(this.state.selectedMovie)
-    console.log(this.state.characters)
-   
-  }
-
-  // calculateHeight(){
-  //   this.state.characters.reduce((a,b)=>a.height + b.height)
-  // }
  
   render(){     
     const options = this.state.movies.map((movie, index)=>     
@@ -117,13 +89,13 @@ class Landing extends Component{
           {options}
         </select>
         {this.state.selectedMovie.title}
-        <button onClick={this.click}>show</button>
+        {/* <button onClick={this.click}>show</button> */}
         <table >
           <thead>
             <tr>
-              <th onClick={this.sort}>Name</th>
-              <th onClick={this.sort}>Gender</th>
-              <th onClick={this.sort}>Height(cm)</th>
+              <th onClick={this.sortTable}>Name</th>
+              <th onClick={this.sortTable}>Gender</th>
+              <th onClick={this.sortTable}>Height</th>
             </tr>
             <tr>
               <td>Total Character{this.state.characters.length}</td>
