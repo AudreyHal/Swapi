@@ -1,4 +1,11 @@
 
+
+export const getSortedMovies=(movies)=>{
+  let sorted_movies= movies.sort((a, b)=> new Date(a.release_date) - new Date(b.release_date));   
+  return sorted_movies   
+}
+
+
 export const sortAsc=(characters, column, sortOrder, sortedColumn)=>{  
   console.log(column)
   let asc_characters;
@@ -16,4 +23,5 @@ export const sortDesc=(characters, column, sortOrder, sortedColumn)=>{
   let desc_characters = characters.reverse();
   return desc_characters;  
 } 
+
 

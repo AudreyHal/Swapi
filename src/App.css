@@ -1,22 +1,82 @@
-.App {
+.Home {
+  background: #ebcd24;
   text-align: center;
+  height: 100vh
 }
 
-.App-logo {
-  height: 40vmin;
+#pageOne {
+  height: 100vh;
+  max-height: 100vh;
+  overflow-y: hidden;
+  background-color: black;
+  transition-property: all;
+  transition-duration: 2s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1)
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#pageOne.closed {
+  animation: closeup .5s;
+  height: 0;
+  max-height: 0vh;
+}
+
+#pageTwo.open {  
+  height: 100vh; 
+  overflow-y: hidden;
+  background-color: black;
+  transition-property: all;
+  transition-duration: 5s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  animation: openup 1.5s;
+}
+
+@keyframes openup {
+  0% {
+    max-height: 0;
+    height: 0;
+  }
+  100% {
+    max-height: 100vh;
+    height: 100vh;
+  }
+}
+
+@keyframes closeup {
+  0% {
+    max-height: 100vh;
+    height: 100vh;
+  }
+  100% {
+    max-height: 0;
+    height: 0;
+  }
+}
+
+#pageOne.closed {
+  max-height: 0
+}
+
+.logo {
+  margin: 200px 0px 0px 0px;
+}
+
+.select-box {
+  padding-top: 20px;
+  position: relative;
+  margin-top: 1.5rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: black;
+  border: 0
 }
 
-.App-link {
-  color: #09d3ac;
+.select-box select {
+  outline: none;
+  color: #d6be65;
+  background: transparent;
+  padding: 7px 50px 7px 8px;
+  background: rgba(0, 0, 0, 1);
+  border: 1px solid #ebcd24;
+  border-radius: 2px;
 }

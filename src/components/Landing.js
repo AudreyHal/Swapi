@@ -1,46 +1,33 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import {sortDesc, sortAsc} from '../helpers'
+import {sortDesc, sortAsc, getSortedMovies} from '../helpers'
 
 
 class Landing extends Component{
   constructor(props){
     super(props);
-    this.state={
-      movies:[],
-      selectedMovie:[],
-      characters:[],
+    this.state={      
+      movies: this.props.movies,
+      selectedMovie:this.props.selectedMovie,
+      characters: this.props.characters,
       sortOrder: "",
-      sortedColumn:"",
-      
-     
+      sortedColumn:"",     
     }
   }
 
-  componentDidMount(){
-    axios.get('https://swapi.co/api/films')
-    .then((response)=>{      
-      let movies= response.data.results     
-      movies.sort(function(a, b){         
-        return new Date(a.release_date) - new Date(b.release_date);
-      });     
-      console.log(movies);
-      this.setState({movies: movies})
-    })  
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    }) 
+
+  componentDidUpdate(){    
+    console.log("cyharacters"+this.props.characters);
+    console.log(this.props.charactersLoaded);
+   
   }
 
-  selectMovie=(e)=>{
-    console.log(e.target.value);
+  selectMovie=(e)=>{    
     let i=e.target.value
     let selectedMovie= this.state.movies[i];
     this.setState({selectedMovie: selectedMovie}, ()=>{
     this.getCharacters() 
-    })   
-    
+    });     
   }
 
   getCharacters() {
@@ -84,11 +71,13 @@ class Landing extends Component{
    )   
     return (	
       <div> 
+        <h1>{this.state.selectedMovie.title}</h1>
         <select onChange={this.selectMovie} value="Select"> 
           <option value="Select" >Select a Movie</option>    
           {options}
         </select>
         {this.state.selectedMovie.title}
+        
         {/* <button onClick={this.click}>show</button> */}
         <table >
           <thead>
