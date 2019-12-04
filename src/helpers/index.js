@@ -6,7 +6,7 @@ export const getSortedMovies=(movies)=>{
 }
 
 
-export const sortAsc=(characters, column, sortOrder, sortedColumn)=>{  
+export const sortAsc=(characters, column)=>{  
   console.log(column)
   let asc_characters;
   if (column === "height") {
@@ -19,7 +19,7 @@ export const sortAsc=(characters, column, sortOrder, sortedColumn)=>{
 }
 
 
-export const sortDesc=(characters, column, sortOrder, sortedColumn)=>{  
+export const sortDesc=(characters, column)=>{  
   let desc_characters = characters.reverse();
   return desc_characters;  
 } 

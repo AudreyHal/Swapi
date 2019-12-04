@@ -42,11 +42,11 @@ class Landing extends Component{
     let sorted_characters;
 
     if (sortOrder === "asc" && sortedColumn === column) {
-      sorted_characters= sortDesc(characters, column, sortOrder, sortedColumn)
+      sorted_characters= sortDesc(characters, column)
     }
     else {      
       this.setState({ sortOrder: "asc", sortedColumn: column});
-      sorted_characters= sortAsc(characters, column, sortOrder, sortedColumn)
+      sorted_characters= sortAsc(characters, column)
     }
     this.setState({ characters: sorted_characters });   
   } 
