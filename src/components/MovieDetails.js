@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {sortDesc, sortAsc, getSortedMovies} from '../helpers'
-import Logo from '../assets/logo2.png'
+import Logo from '../assets/logo.png'
 
 
-class Landing extends Component{
+class MovieDetails extends Component{
   constructor(props){
     super(props);
     this.state={      
@@ -64,7 +64,7 @@ class Landing extends Component{
     </tr>    
    )   
     return (	
-      <div className="Landing">
+      <div className="MovieDetails">
 
         <div className="container-fluid page-header">       
           <div className="row">
@@ -107,4 +107,4 @@ class Landing extends Component{
 }
 
 
-export default Landing
+export default MovieDetails

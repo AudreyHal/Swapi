@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Landing from './Landing'
+import MovieDetails from './MovieDetails'
 import axios from 'axios'
 import {getSortedMovies} from '../helpers'
-import Logo from '../assets/logo2.png'
+import Logo from '../assets/logo.png'
 
 
 class Home extends Component{
@@ -20,12 +20,11 @@ class Home extends Component{
   componentDidMount(){
     axios.get('https://swapi.co/api/films')
     .then((response)=>{      
-      let movies= getSortedMovies(response.data.results );     
-      console.log(movies)
+      let movies= getSortedMovies(response.data.results );       
       this.setState({movies: movies});
     })  
     .catch(function (error) {     
-      console.log(error);
+      // console.log(error);
     }) 
   }
 
@@ -47,7 +46,6 @@ class Home extends Component{
     )
     Promise.all(iterable)
     .then(responses => {      
-      console.log("dddddddddddddddddddd"+this.state.characters);
       this.setState({charactersLoaded: true });
     })
   }
@@ -71,7 +69,7 @@ class Home extends Component{
 
         { this.state.charactersLoaded ?
         <div id="pageTwo" className={`${this.state.charactersLoaded ? "open":"closed"}`}>          
-          <Landing key={this.state.characters} selectedMovie={this.state.selectedMovie}  movies={this.state.movies} characters={this.state.characters} charactersLoaded={this.state.charactersLoaded} ></Landing>
+          <MovieDetails key={this.state.characters} selectedMovie={this.state.selectedMovie}  movies={this.state.movies} characters={this.state.characters} charactersLoaded={this.state.charactersLoaded} ></MovieDetails>
         </div>
         : ""
         }
