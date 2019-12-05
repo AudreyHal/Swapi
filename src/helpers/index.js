@@ -25,5 +25,20 @@ export const sortDesc=(characters, column)=>{
 } 
 
 
+export const convertHeight = (heightInCm) => {
+  const heightInInches = heightInCm / 2.54;
+  const heightInFeet = heightInCm / 30.48;
+  return { heightInCm , heightInInches, heightInFeet}
+}
+
+export const totalHeight = (characters) => {
+  let AllHeights = characters.map(character => parseInt(character.height));
+  let validHeights=  AllHeights.filter(height => Number.isInteger(height));
+  let totalHeight = validHeights.reduce((a, b) => a + b, 0);
+  let{ heightInInches, heightInFeet } = convertHeight(totalHeight);
+  return  `${totalHeight}cm (${heightInFeet.toFixed(2)}ft/${heightInInches.toFixed(2)}in)`;
+}
+
+
 
 

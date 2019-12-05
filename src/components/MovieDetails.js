@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import {sortDesc, sortAsc, getSortedMovies} from '../helpers'
+import {sortDesc, sortAsc, getSortedMovies, totalHeight} from '../helpers'
 import {fetchData} from '../services'
 import Logo from '../assets/logo.png'
 
@@ -9,9 +9,10 @@ class MovieDetails extends Component{
   constructor(props){
     super(props);
     this.state={      
-      movies: [],
-      selectedMovie:[],
-      characters: [],
+      movies: this.props.movies,
+      selectedMovie: this.props.selectedMovie,
+      characters: this.props.characters,
+      characters_by_gender: this.props.characters,
       sortOrder: "",
       sortedColumn:"",     
     }
@@ -33,7 +34,8 @@ class MovieDetails extends Component{
     this.state.selectedMovie.characters.map((url) =>
       axios.get(url).then((response) => {
         this.setState(prevState => ({
-          characters: [...prevState.characters, response.data]
+          characters: [...prevState.characters, response.data],
+          characters_by_gender: [...prevState.characters_by_gender, response.data]
         }));
       })
     )
@@ -41,7 +43,7 @@ class MovieDetails extends Component{
 
   sortTable = (e) => {
     let column = e.target.innerHTML.toLowerCase();
-    let characters = this.state.characters;    
+    let characters = this.state.characters_by_gender;    
     let sortOrder=this.state.sortOrder;
     let sortedColumn=this.state.sortedColumn;
     let sorted_characters;
@@ -56,12 +58,24 @@ class MovieDetails extends Component{
     this.setState({ characters: sorted_characters });   
   } 
 
+  selectGender=(e)=>{ 
+    let gender=e.target.value;
+    let characters=this.state.characters
+    if(gender !== "all"){
+    let sorted_characters= characters.filter(character => character.gender === gender);
+    this.setState({characters_by_gender: sorted_characters});
+    }
+    else{
+      this.setState({characters_by_gender: characters});
+    }       
+  }
  
-  render(){     
+  render(){
+    let characters =this.state.characters_by_gender    
     const options = this.state.movies.map((movie, index)=>     
      <option key={index} value={index}  >{movie.title} </option>     
     ) 
-    const characters= this.state.characters.map((character, index)=>     
+    characters= characters.map((character, index)=>     
     <tr key={index} >
       <td >{character.name} </td> 
       <td >{character.gender} </td> 
@@ -74,7 +88,7 @@ class MovieDetails extends Component{
         <div className="container-fluid page-header">       
           <div className="row">
             <div className="col-sm-12 col-md-6 left-header-column">
-            <img src={Logo} alt="star-wars-logo" width="170" height="68" />
+            <img src={Logo} alt="star-wars-logo" width="130" height="48" />
             </div> 
 
             <div className="col-sm-12 col-md-6 right-header-column">
@@ -89,9 +103,20 @@ class MovieDetails extends Component{
           </div>
         </div>
         
-        <h1>{this.state.selectedMovie.title}</h1>
-        <div class="marquee">
+        <h1 className="movieTitle">{this.state.selectedMovie.title}</h1>
+        <div className="marquee">
          <p>{this.state.selectedMovie.opening_crawl} </p>
+        </div>
+
+        <div className="select-box d-flex justify-content-end gender-selection" >
+          <select onChange={this.selectGender} value="Select" >
+            <option value="">Select Gender</option>  
+            <option value="all">All</option>  
+            <option value="male">Male</option> 
+            <option value="female">Female</option>            
+            <option value="hermaphrodite">hermaphrodite</option>  
+            <option value="n/a">n/a</option>       
+          </select>
         </div>             
                 
         <table className="d-flex justify-content-center">
@@ -100,15 +125,15 @@ class MovieDetails extends Component{
               <th onClick={this.sortTable}>Name</th>
               <th onClick={this.sortTable}>Gender</th>
               <th onClick={this.sortTable}>Height</th>
-            </tr>
-            <tr>
-              <td>Total Characters {this.state.characters.length}</td>
-              <td></td>  
-              <td>Total Height {this.state.characters.length}</td>                      
-            </tr>
+            </tr>           
           </thead>
           <tbody>               
-            {characters}                                 
+            {characters}  
+            <tr>
+              <td>Total Characters {characters.length}</td>
+              <td></td>  
+              <td>Total Height {totalHeight(characters)}</td>                      
+            </tr>                               
           </tbody>
         </table>
       </div>

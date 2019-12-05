@@ -1,5 +1,5 @@
-import axios from 'axios'
 
+import axios from 'axios'
 
 export function fetchData(url){  
   return axios.get(url)  

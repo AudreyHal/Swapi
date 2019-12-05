@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import MovieDetails from './MovieDetails'
 import {getSortedMovies} from '../helpers'
 import {fetchData} from '../services'
@@ -11,9 +12,9 @@ class Home extends Component{
     this.state={
       movies:[],
       selectedMovie:[],
-      characters:[],
+      characters:[],      
       closed: false,
-      charactersLoaded: true   
+      charactersLoaded: false  
     }
   }
   
@@ -23,9 +24,10 @@ class Home extends Component{
     .then((response)=>{
       let movies= getSortedMovies(response.data.results );
       this.setState({movies: movies});      
+      console.log(movies)
     })
     .catch(function (error) {     
-        // console.log(error);
+        console.log(error);
     })    
   }
 

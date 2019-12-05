@@ -26,7 +26,7 @@
 
 #pageTwo.open {  
   height: 100vh; 
-  overflow-y: hidden;
+  overflow-y: auto;
   background-color: black;
   transition-property: all;
   transition-duration: 5s;
@@ -102,13 +102,16 @@ table{
   border: 1px solid #ebcd24; 
 }
 
-
+.movieTitle{
+  color: #9c811d;
+  padding-top: 30px 
+}
 
 .marquee {
  height: 50px;	
  overflow: hidden;
  position: relative; 
- color: #d6be65;;
+ color: #8f7d3a;
 
 }
 .marquee p {
@@ -147,6 +150,9 @@ table{
  }
 }
 
+.gender-selection{
+  padding: 30px 20px 0px 0px
+}
 
 @media (max-width: 991px) { 
   .left-header-column{
