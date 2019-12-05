@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {sortDesc, sortAsc, getSortedMovies} from '../helpers'
+import {fetchData} from '../services'
 import Logo from '../assets/logo.png'
 
 
@@ -14,6 +15,10 @@ class MovieDetails extends Component{
       sortOrder: "",
       sortedColumn:"",     
     }
+  }
+
+  componentDidUpdate(){
+    console.log(this.props.charactersLoaded)
   }
 
   selectMovie=(e)=>{    
@@ -84,8 +89,11 @@ class MovieDetails extends Component{
           </div>
         </div>
         
-        <h1>{this.state.selectedMovie.title}</h1>        
-        
+        <h1>{this.state.selectedMovie.title}</h1>
+        <div class="marquee">
+         <p>{this.state.selectedMovie.opening_crawl} </p>
+        </div>             
+                
         <table className="d-flex justify-content-center">
           <thead>
             <tr>
@@ -94,7 +102,9 @@ class MovieDetails extends Component{
               <th onClick={this.sortTable}>Height</th>
             </tr>
             <tr>
-              <td>Total Character{this.state.characters.length}</td>                
+              <td>Total Characters {this.state.characters.length}</td>
+              <td></td>  
+              <td>Total Height {this.state.characters.length}</td>                      
             </tr>
           </thead>
           <tbody>               

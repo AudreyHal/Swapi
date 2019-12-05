@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import MovieDetails from './MovieDetails'
-import axios from 'axios'
 import {getSortedMovies} from '../helpers'
+import {fetchData} from '../services'
 import Logo from '../assets/logo.png'
 
 
@@ -18,14 +18,15 @@ class Home extends Component{
   }
   
   componentDidMount(){
-    axios.get('https://swapi.co/api/films')
-    .then((response)=>{      
-      let movies= getSortedMovies(response.data.results );       
-      this.setState({movies: movies});
-    })  
+    let url='https://swapi.co/api/films'
+    fetchData(url)
+    .then((response)=>{
+      let movies= getSortedMovies(response.data.results );
+      this.setState({movies: movies});      
+    })
     .catch(function (error) {     
-      // console.log(error);
-    }) 
+        // console.log(error);
+    })    
   }
 
   selectMovie=(e)=>{    
@@ -38,7 +39,8 @@ class Home extends Component{
 
   getCharacters() {
     let iterable=this.state.selectedMovie.characters.map((url) =>
-      axios.get(url).then((response) => {
+      fetchData(url).then((response) => {
+        
         this.setState(prevState => ({
           characters: [...prevState.characters, response.data]
         }));
@@ -47,6 +49,7 @@ class Home extends Component{
     Promise.all(iterable)
     .then(responses => {      
       this.setState({charactersLoaded: true });
+      
     })
   }
 
