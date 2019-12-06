@@ -118,24 +118,26 @@ class MovieDetails extends Component{
             <option value="n/a">n/a</option>       
           </select>
         </div>             
-                
-        <table className="d-flex justify-content-center">
-          <thead>
-            <tr>
-              <th onClick={this.sortTable}>Name</th>
-              <th onClick={this.sortTable}>Gender</th>
-              <th onClick={this.sortTable}>Height</th>
-            </tr>           
-          </thead>
-          <tbody>               
-            {characters}  
-            <tr>
-              <td>Total Characters {characters.length}</td>
-              <td></td>  
-              <td>Total Height {totalHeight(characters)}</td>                      
-            </tr>                               
-          </tbody>
-        </table>
+
+         <div className="table-container d-flex justify-content-center">       
+          <table className="">
+            <thead>
+              <tr>
+                <th onClick={this.sortTable}>Name</th>
+                <th onClick={this.sortTable}>Gender</th>
+                <th onClick={this.sortTable}>Height</th>
+              </tr>           
+            </thead>
+            <tbody>               
+              {characters}  
+              <tr>
+                <td>Total Characters {characters.length}</td>
+                <td></td>  
+                <td>Total Height {totalHeight(characters)}</td>                      
+              </tr>                               
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }

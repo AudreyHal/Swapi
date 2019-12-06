@@ -14,7 +14,8 @@ class Home extends Component{
       selectedMovie:[],
       characters:[],      
       closed: false,
-      charactersLoaded: false  
+      charactersLoaded: false,
+      isLoaded: false 
     }
   }
   
@@ -23,7 +24,7 @@ class Home extends Component{
     fetchData(url)
     .then((response)=>{
       let movies= getSortedMovies(response.data.results );
-      this.setState({movies: movies});      
+      this.setState({movies: movies, isLoaded: true });      
       console.log(movies)
     })
     .catch(function (error) {     
