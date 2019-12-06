@@ -89,9 +89,8 @@ class MovieDetails extends Component{
         <div className="container-fluid page-header">       
           <div className="row">
             <div className="col-sm-12 col-md-6 left-header-column">
-            <img src={Logo} alt="star-wars-logo" width="130" height="48" />
+              <img src={Logo} alt="star-wars-logo" width="130" height="48" />
             </div> 
-
             <div className="col-sm-12 col-md-6 right-header-column">
               <div className="select-box" >
                 <select onChange={this.selectMovie} value="Select" > 
@@ -100,7 +99,6 @@ class MovieDetails extends Component{
                 </select>
               </div>
             </div>
-
           </div>
         </div>
         
@@ -142,6 +140,5 @@ class MovieDetails extends Component{
     )
   }
 }
-
 
 export default MovieDetails

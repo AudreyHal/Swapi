@@ -42,8 +42,7 @@ class Home extends Component{
 
   getCharacters() {
     let iterable=this.state.selectedMovie.characters.map((url) =>
-      fetchData(url).then((response) => {
-        
+      fetchData(url).then((response) => {        
         this.setState(prevState => ({
           characters: [...prevState.characters, response.data]
         }));
@@ -51,8 +50,7 @@ class Home extends Component{
     )
     Promise.all(iterable)
     .then(responses => {      
-      this.setState({charactersLoaded: true });
-      
+      this.setState({charactersLoaded: true });      
     })
     .catch((error)=>{     
       this.setState({error: true });      
@@ -76,20 +74,20 @@ class Home extends Component{
    ) 
     return(
       <div className="Home"> 
-          <div className="d-flex justify-content-center handlers"> 
-            {!charactersLoaded && closeSection || !isLoaded && !error ?<div id="Loader" className="spinner"></div> :"" }
-            {error? <div className="error_msg"><h2>Oops!!</h2><p>Something went wrong. Try Again.</p></div> :""} 
-          </div>              
-          <div id="pageOne" className={classes}>                        
-              <div className="logo"><img src={Logo} alt="star-wars-logo" /></div>
-              <div className="select-box select-input-container" >
-                <select onChange={this.selectMovie} value="Select" > 
-                  <option value="Select" >Select a Movie</option>  
-                  {options}         
-                </select>
-              </div>           
-          </div>
-       
+        <div className="d-flex justify-content-center handlers"> 
+          {!charactersLoaded && closeSection || !isLoaded && !error ?<div id="Loader" className="spinner"></div> :"" }
+          {error? <div className="error_msg"><h2>Oops!!</h2><p>Something went wrong. Try Again.</p></div> :""} 
+        </div>
+                      
+        <div id="pageOne" className={classes}>                        
+            <div className="logo"><img src={Logo} alt="star-wars-logo" /></div>
+            <div className="select-box select-input-container" >
+              <select onChange={this.selectMovie} value="Select" > 
+                <option value="Select" >Select a Movie</option>  
+                {options}         
+              </select>
+            </div>           
+        </div>       
 
         { charactersLoaded ? 
           <div id="pageTwo" className={`${this.state.charactersLoaded && !error ? "open":"closed"}`}>          
