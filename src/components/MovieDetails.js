@@ -18,10 +18,6 @@ class MovieDetails extends Component{
     }
   }
 
-  componentDidUpdate(){
-    console.log(this.props.charactersLoaded)
-  }
-
   selectMovie=(e)=>{    
     let i=e.target.value
     let selectedMovie= this.state.movies[i];
@@ -31,13 +27,18 @@ class MovieDetails extends Component{
   }
 
   getCharacters() {
+    let characters=[]
     this.state.selectedMovie.characters.map((url) =>
-      axios.get(url).then((response) => {
-        this.setState(prevState => ({
-          characters: [...prevState.characters, response.data],
-          characters_by_gender: [...prevState.characters_by_gender, response.data]
+      fetchData(url).then((response) => {
+        characters.push(response.data)
+        this.setState(({
+          characters: characters,
+          characters_by_gender: characters
         }));
       })
+      .catch((error) =>     
+        this.props.catchError()
+      )
     )
   }
 
@@ -75,12 +76,12 @@ class MovieDetails extends Component{
     const options = this.state.movies.map((movie, index)=>     
      <option key={index} value={index}  >{movie.title} </option>     
     ) 
-    characters= characters.map((character, index)=>     
-    <tr key={index} >
-      <td >{character.name} </td> 
-      <td >{character.gender} </td> 
-      <td >{character.height} </td> 
-    </tr>    
+    let table_characters= characters.map((character, index)=>     
+      <tr key={index} >
+        <td >{character.name} </td> 
+        <td >{character.gender} </td> 
+        <td >{character.height} </td> 
+      </tr>    
    )   
     return (	
       <div className="MovieDetails">
@@ -108,7 +109,7 @@ class MovieDetails extends Component{
          <p>{this.state.selectedMovie.opening_crawl} </p>
         </div>
 
-        <div className="select-box d-flex justify-content-end gender-selection" >
+        <div className="select-box d-flex gender-selection" >
           <select onChange={this.selectGender} value="Select" >
             <option value="">Select Gender</option>  
             <option value="all">All</option>  
@@ -120,7 +121,7 @@ class MovieDetails extends Component{
         </div>             
 
          <div className="table-container d-flex justify-content-center">       
-          <table className="">
+          <table>
             <thead>
               <tr>
                 <th onClick={this.sortTable}>Name</th>
@@ -129,11 +130,10 @@ class MovieDetails extends Component{
               </tr>           
             </thead>
             <tbody>               
-              {characters}  
+              {table_characters}  
               <tr>
-                <td>Total Characters {characters.length}</td>
-                <td></td>  
-                <td>Total Height {totalHeight(characters)}</td>                      
+                <td><b>Total Characters:</b> {characters.length}</td>                
+                <td colSpan="2"><b>Total Height:</b> {totalHeight(characters)}</td>                      
               </tr>                               
             </tbody>
           </table>

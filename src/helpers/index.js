@@ -6,8 +6,7 @@ export const getSortedMovies=(movies)=>{
 }
 
 
-export const sortAsc=(characters, column)=>{  
-  console.log(column)
+export const sortAsc=(characters, column)=>{   
   let asc_characters;
   if (column === "height") {
    asc_characters= characters.sort((a, b)=> parseInt(a.height) - parseInt(b.height));
@@ -32,13 +31,13 @@ export const convertHeight = (heightInCm) => {
 }
 
 export const totalHeight = (characters) => {
+  console.log(characters)
   let AllHeights = characters.map(character => parseInt(character.height));
   let validHeights=  AllHeights.filter(height => Number.isInteger(height));
   let totalHeight = validHeights.reduce((a, b) => a + b, 0);
   let{ heightInInches, heightInFeet } = convertHeight(totalHeight);
   return  `${totalHeight}cm (${heightInFeet.toFixed(2)}ft/${heightInInches.toFixed(2)}in)`;
 }
-
 
 
 
