@@ -25,7 +25,8 @@ class Home extends Component{
     fetchData(url)
     .then((response)=>{
       let movies= getSortedMovies(response.data.results );
-      this.setState({movies: movies, isLoaded: true });       
+      this.setState({movies: movies, isLoaded: true });   
+      console.log(movies)
     })
     .catch((error)=>{     
       this.setState({error: true });     
