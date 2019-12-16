@@ -1,8 +1,8 @@
-body{
+body {
   background-color: black;
 }
 
-.App{ 
+.App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -18,16 +18,16 @@ body{
   margin-top: 32px;
 }
 
-.movie-title{
-  font-size: 38px; 
+.movie-title {
+  font-size: 38px;
   color: #ebcd24;
-  font-weight: 600; 
+  font-weight: 600;
   padding: 10px 0px;
 }
 
-.crawl{
+.crawl {
   color: rgba(245, 218, 86, 0.7);
-  font-size: 20px; 
+  font-size: 20px;
 }
 
 .select-box select {
@@ -40,7 +40,7 @@ body{
   border-radius: 2px;
 }
 
-.MovieIntro{
+.MovieIntro {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -49,25 +49,26 @@ body{
   padding: 4rem 0px;
 }
 
-.SortableTable{
+.SortableTable {
   text-align: center;
 }
 
 table {
-  border-collapse:separate;
-  border-spacing: 0px 3px;  
+  border-collapse: separate;
+  border-spacing: 0px 3px;
   margin: 20px 0px;
   width: 100%;
   text-align: center;
 }
 
-th {  
+th {
   padding: 1rem;
 }
 
-th button, th button:hover{
+th button,
+th button:hover {
   background: transparent;
-  outline:none !important;
+  outline: none !important;
   border: 0px;
   color: #ebcd24;
 }
@@ -77,52 +78,52 @@ td {
   padding: 1rem
 }
 
-thead tr, tfoot tr {
+thead tr,
+tfoot tr {
   background-color: rgb(32, 30, 5);
   padding-bottom: 5px
 }
 
-tbody tr{
+tbody tr {
   background: rgb(44, 37, 13, 0.3);
 }
 
 tr {
   border: 1px solid rgb(235, 205, 36);
-  padding-bottom: 5px;  
+  padding-bottom: 5px;
 }
 
-th img[data-toggle=desc]{
+th img[data-toggle=desc] {
   visibility: visible;
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
 }
 
-th img[data-toggle=none]{
-  visibility: hidden; 
+th img[data-toggle=none] {
+  visibility: hidden;
 }
 
-th img{
-  margin-left:5px;
+th img {
+  margin-left: 5px;
   pointer-events: none
 }
 
 .scrolling-text {
   animation: scroll 6s linear 0s;
   position: absolute;
+  text-align: center;
   z-index: 1;
   top: 50%;
   width: 90%;
-  text-align: center;
-
 }
 
 @keyframes scroll {
-    0% {
-        top: 50%;
-    }
-    100% {
-        top: -20%;
-    }
+  0% {
+    top: 50%;
+  }
+  100% {
+    top: -20%;
+  }
 }
 
 .spinner {
@@ -157,15 +158,18 @@ th img{
   }
 }
 
-.error_msg{
+.error_msg {
   font-size: 20px;
   color: #ebcd24;
   margin-bottom: 20px;
   z-index: 3;
   position: relative;
-  
 }
 
-.main-content{
-  text-align: center 
+.main-content {
+  text-align: center
+}
+
+.footer-field {
+  color: #ebcd24;
 }

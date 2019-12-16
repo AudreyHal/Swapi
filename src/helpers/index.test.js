@@ -1,4 +1,4 @@
-import {sortDesc, sortAsc, getSortedMovies} from '../helpers'
+import {sortDesc, sortAsc, sortMoviesByDate} from '../helpers'
 
 describe('HELPERS', () => {
   it('should sort in ascending order', () => {
@@ -46,7 +46,7 @@ describe('HELPERS', () => {
       {title: "Fast and Furious", producer: "Gary Kurtz, Rick McCallum", release_date: "2010-05-25" }
     ]
       
-     expect(getSortedMovies(movies)).toEqual(expectedResult)
+     expect(sortMoviesByDate(movies)).toEqual(expectedResult)
  })
 })
 

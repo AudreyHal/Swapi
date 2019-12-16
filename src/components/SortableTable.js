@@ -102,9 +102,9 @@ const SortableTable  = ({data, movie}) => {
         <tfoot>
           <tr>
             <td>
-              <b>Total Characters:</b> {newData.length}</td>
+              <div className="footer-field"><b>Total Characters:</b></div> {newData.length}</td>
             <td colSpan="2">
-              <b>Total Height:</b> {totalHeight(newData)}</td>
+              <div className="footer-field"><b>Total Height:</b></div> {totalHeight(newData)}</td>
           </tr>
         </tfoot>
       </table>
