@@ -1,8 +1,18 @@
 
 
-export const getSortedMovies=(movies)=>{
+export const sortMoviesByDate=(movies)=>{
   let sorted_movies= movies.sort((a, b)=> new Date(a.release_date) - new Date(b.release_date));   
   return sorted_movies   
+}
+
+export const sortStatus=(sortType, field)=>{
+    if (sortType.field === field && sortType.order === "asc") {
+      return "asc"
+  } else if (sortType.field === field && sortType.order === "desc") {
+      return "desc"
+  } else {
+      return "none"
+  }
 }
 
 

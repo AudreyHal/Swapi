@@ -1,17 +1,20 @@
 import React from 'react';
 
 
-const MovieDropDown = ({ isLoading, data, placeholder, onChange, value}) => { 
+const MovieDropDown = ({ data, onChange, value}) => { 
     
       return (
         <div className="select-box" >
-          <select onChange={this.selectMovie} value="Select" > 
-            <option value="Select" >Select a Movie</option>  
-            {options}         
+          <select onChange={onChange} value={value.title} > 
+          <option value="Select"  disabled>Select a Movie ...</option>           
+            {data.map((movie, index)=>     
+              <option key={index} value={index}> {movie.title} </option>
+            )
+            }       
+                    
           </select>
         </div>
       );
-  };
+  };  
   
-  
-  export default MovieDropDown;
+export default MovieDropDown;

@@ -1,59 +1,115 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import {sortDesc, sortAsc, getSortedMovies, sortStatus, totalHeight} from '../helpers'
+import arrow from '../assets/up-arrow.svg';
 
-const SortableTable  = (data) => {
+const SortableTable  = ({data, movie}) => {
   const [sortType, setSortType] = useState({ field: "", order: "" });
-  const [newData, setNewData] = useState(data);
+  const [newData, setNewData] = useState([]);
+  const genderSet = useRef(new Set());
+  const gendersToArray = useRef([]);
+  let [defaultGenderOption, setdefaultGenderOption] = useState("all");
 
-  sortTable = (e) => {
-    let column = e.target.innerHTML.toLowerCase();
-    let characters = this.state.characters_by_gender;    
-    let sortOrder=this.state.sortOrder;
-    let sortedColumn=this.state.sortedColumn;
+
+  
+  useEffect(() => { 
+    data.map((item) => {
+      genderSet.current.add(item.gender);
+    });
+  
+    gendersToArray.current = Array.from(genderSet.current);
+     
+    setNewData(data)
+    setdefaultGenderOption("all");
+  }, [newData,data])
+
+
+  const handleTableSort = (e) => {
+    const field = e.target.id;    
     let sorted_characters;
+    console.log("field" +field)
 
-    if (sortOrder === "asc" && sortedColumn === column) {
-      sorted_characters= sortDesc(characters, column)
+    if (sortType.order === "asc" && sortType.field === field) {
+      sorted_characters= sortDesc(newData, field)
+      setSortType({ field, order: "desc" });
+      console.log("sortdesc"+sortType.order)
     }
-    else {      
-      this.setState({ sortOrder: "asc", sortedColumn: column});
-      sorted_characters= sortAsc(characters, column)
+    else { 
+      setSortType({ field, order: "asc" })     
+      sorted_characters= sortAsc(newData, field)
+      console.log("sortasc"+sortType.order)
     }
-    this.setState({ characters: sorted_characters });   
+    setNewData(sorted_characters);
+    totalHeight(newData)
   } 
 
+  const handleGenderSelection = (e) => {
+    const selectedGender = e.target.value;
+    setdefaultGenderOption(e.target.value)
+    let result;
+
+    if (selectedGender !== "all") {
+      result = data.filter((character) => character.gender === selectedGender);
+    } else {
+      result = data;
+    }
+    setNewData(result);
+    totalHeight(newData)
+}
+
   return (
-    <div>
-      <div className="select-box d-flex gender-selection" >
-      <select onChange={this.selectGender} value="Select" >
-        {data.map}
-        {/* <option value="">Select Gender</option>  
-        <option value="all">All</option>  
-        <option value="male">Male</option> 
-        <option value="female">Female</option>            
-        <option value="hermaphrodite">hermaphrodite</option>  
-        <option value="n/a">n/a</option>        */}
+    <div className="SortableTable">      
+      <div className="select-box" >
+      <select onChange={handleGenderSelection} value={defaultGenderOption}  >
+      <option value="all" >All</option>
+        {                    
+          gendersToArray.current.map((gender) => (
+            <option key={gender} value={gender}>{`${gender.charAt(0).toUpperCase()}${gender.slice(1)}`}</option>
+          ))
+        }
+        
       </select>
     </div>             
 
-      <div className="table-container d-flex justify-content-center">       
+         
         <table>
           <thead>
             <tr>
-              <th onClick={this.sortTable}>Name</th>
-              <th onClick={this.sortTable}>Gender</th>
-              <th onClick={this.sortTable}>Height</th>
+              <th>
+                <button className="table-field" id="name" onClick={handleTableSort}  >
+                  Name<img src={arrow} height={10} width={10} alt="toggle arrow" data-toggle={sortStatus(sortType, "name")} />
+                </button >
+                </th>
+              <th>
+                <button className="table-field" id="gender" onClick={handleTableSort}   >
+                  Gender<img src={arrow} height={10} width={10} alt="toggle arrow" data-toggle={sortStatus(sortType, "gender")} />
+                </button>
+              </th>
+              <th>
+                <button className="table-field" id="height" onClick={handleTableSort}  >
+                  Height(cm)<img src={arrow} height={10} width={10} alt="toggle arrow" data-toggle={sortStatus(sortType, "height")} />
+                </button>
+              </th>              
             </tr>           
           </thead>
           <tbody>               
-            {table_characters}  
+            
+          {
+                        newData.map(character => (
+                            <tr key={character.name}>
+                                <td>{character.name}</td>
+                                <td>{character.gender}</td>
+                                <td>{character.height}</td>
+                            </tr>
+                        ))
+                    }
             <tr>
-              <td><b>Total Characters:</b> {characters.length}</td>                
-              <td colSpan="2"><b>Total Height:</b> {totalHeight(characters)}</td>                      
+              <td><b>Total Characters:</b> {newData.length}</td>                
+              <td colSpan="2"><b>Total Height:</b> {totalHeight(newData)}</td>                      
             </tr>                               
           </tbody>
         </table>
       </div>
-    </div>
+    
   );
 };
     
