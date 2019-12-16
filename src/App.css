@@ -1,4 +1,6 @@
-body{background-color: black;}
+body{
+  background-color: black;
+}
 
 .App{ 
   min-height: 100vh;
@@ -53,8 +55,7 @@ body{background-color: black;}
 
 table {
   border-collapse:separate;
-  border-spacing: 0px 3px;
-  /* border: 1px solid #ebcd24; */
+  border-spacing: 0px 3px;  
   margin: 20px 0px;
   width: 100%;
   text-align: center;
@@ -84,6 +85,7 @@ thead tr, tfoot tr {
 tbody tr{
   background: rgb(44, 37, 13, 0.3);
 }
+
 tr {
   border: 1px solid rgb(235, 205, 36);
   padding-bottom: 5px;  
@@ -104,51 +106,8 @@ th img{
   pointer-events: none
 }
 
-.marquee {
-  height: 50px;
-  text-align: left;
-  /* overflow: hidden; */
-  position: relative;
-  color: #8f7d3a;
-}
-
-.marquee p {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  line-height: 50px;
-  text-align: center;
-  -moz-transform: translateX(100%);
-  -webkit-transform: translateX(100%);
-  transform: translateX(100%);
-  -moz-animation: scroll-left 15s linear infinite;
-  -webkit-animation: scroll-left 15s linear infinite;
-  animation: scroll-left 15s linear infinite;
-}
-
-@-webkit-keyframes scroll-left {
-  0% {
-    -webkit-transform: translateY(100%);
-  }
-  100% {
-    -webkit-transform: translateY(-100%);
-  }
-}
-
-@keyframes scroll-left {
-  0% {
-    
-    transform: translateY(100%);
-  }
-  100% {
-    
-    transform: translateY(-100%);
-  }
-}
-
 .scrolling-text {
-  animation: scroll 15s linear 0s;
+  animation: scroll 6s linear 0s;
   position: absolute;
   z-index: 1;
   top: 50%;
@@ -156,7 +115,6 @@ th img{
   text-align: center;
 
 }
-
 
 @keyframes scroll {
     0% {
@@ -206,4 +164,8 @@ th img{
   z-index: 3;
   position: relative;
   
+}
+
+.main-content{
+  text-align: center 
 }

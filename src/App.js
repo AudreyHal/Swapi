@@ -34,34 +34,43 @@ function App() {
     const selectedMovieIndex = e.target.value;
     const movie= moviesByDate[selectedMovieIndex ];     
     selectedMovie.current = movie;
-    setShowIntro(true)
-    console.log("selectedMovie"+ selectedMovie.current.title);
-  
-   }
+    setShowIntro(true);  
+  }
   
   return (
     <div className="App">
       {
         (hasError || fetchCharacterError) && (<div className="error_msg">Oops...an error occured. Try again </div>)
-      }       
-      {showIntro ?< MovieIntro data={selectedMovie.current ? selectedMovie.current: []} />: ""}
+      }   
+          
+      {showIntro ?
+      (< MovieIntro data={selectedMovie.current ? selectedMovie.current: []} />)
+      :
+      (
+        <div className="main-content">
+          <div className="logo"><img src={Logo} alt="star-wars-logo" /></div>
 
-      {!showIntro && (<div className="logo"><img src={Logo} alt="star-wars-logo" /></div>)}
-      {isLoaded ?         
-      <MovieDropDown 
-      data={moviesByDate}
-      onChange={handleMovieSelection}
-      value={selectedMovie.current ? selectedMovie.current.title : "Select a Movie"}
-      />
-      : 
-      <div id="Loader" className="spinner"></div> } 
-      {selectedMovie.current && !isLoadingCharacters ? 
-      <SortableTable
-      data={characters}
-      movie={selectedMovie.current ? selectedMovie.current: []}
-      /> 
-      :""
-      } 
+          {isLoaded ?
+            (<MovieDropDown 
+            data={moviesByDate}
+            onChange={handleMovieSelection}
+            value={selectedMovie.current ? selectedMovie.current.title : "Select a Movie"}
+            />)
+          : 
+            (<div id="Loader" className="spinner"></div>)
+          } 
+
+          {selectedMovie.current && !isLoadingCharacters ? 
+            <SortableTable
+            data={characters}
+            movie={selectedMovie.current ? selectedMovie.current: []}
+            /> 
+          :
+            ""
+          } 
+
+        </div>
+      )}
     </div>
   );
 }

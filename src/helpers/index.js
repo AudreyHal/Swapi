@@ -5,16 +5,15 @@ export const sortMoviesByDate=(movies)=>{
   return sorted_movies   
 }
 
-export const sortStatus=(sortType, field)=>{
-    if (sortType.field === field && sortType.order === "asc") {
-      return "asc"
+export const sortStatus = (sortType, field) => {
+  if (sortType.field === field && sortType.order === "asc") {
+    return "asc"
   } else if (sortType.field === field && sortType.order === "desc") {
-      return "desc"
+    return "desc"
   } else {
-      return "none"
+    return "none"
   }
 }
-
 
 export const sortAsc=(characters, column)=>{   
   let asc_characters;

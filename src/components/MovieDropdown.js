@@ -10,7 +10,7 @@ const MovieDropDown = ({ data, onChange, value}) => {
             {data.map((movie, index)=>     
               <option key={index} value={index}> {movie.title} </option>
             )
-            }       
+            }    
                     
           </select>
         </div>

@@ -15,8 +15,7 @@ const SortableTable  = ({data, movie}) => {
       genderSet.current.add(item.gender);
     });
   
-    gendersToArray.current = Array.from(genderSet.current);
-     
+    gendersToArray.current = Array.from(genderSet.current);     
     setNewData(data)
     setdefaultGenderOption("all");
   }, [data])
@@ -24,8 +23,7 @@ const SortableTable  = ({data, movie}) => {
 
   const handleTableSort = (e) => {
     const field = e.target.id;    
-    let sorted_characters;
-    console.log("field" +field)
+    let sorted_characters;    
 
     if (sortType.order === "asc" && sortType.field === field) {
       sorted_characters= sortDesc(newData, field)
@@ -41,7 +39,6 @@ const SortableTable  = ({data, movie}) => {
 
 
   const handleGenderSelection = (e) => {
-    console.log("e.target.value"+ e.target.value)
     const selectedGender = e.target.value;
     setdefaultGenderOption(e.target.value)
     let result;
@@ -53,60 +50,62 @@ const SortableTable  = ({data, movie}) => {
     }
     setNewData(result);
     totalHeight(newData)
-}
+  }
 
   return (
-    <div className="SortableTable">      
-      <div className="select-box" >
-      <select onChange={handleGenderSelection} value={defaultGenderOption}  >
-      <option value="all" >All</option>
-        {                    
-          gendersToArray.current.map((gender) => (
-            <option key={gender} value={gender}>{`${gender.charAt(0).toUpperCase()}${gender.slice(1)}`}</option>
-          ))
-        }
-        
-      </select>
-    </div> 
-         
+    <div className="SortableTable">
+      <div className="select-box">
+        <select onChange={handleGenderSelection} value={defaultGenderOption}>
+          <option value="all">All</option>
+          { gendersToArray.current.map((gender) => (
+          <option key={gender} value={gender}>{`${gender.charAt(0).toUpperCase()}${gender.slice(1)}`}</option>
+          )) }
+
+        </select>
+      </div>
+
       <table>
         <thead>
           <tr>
             <th>
-              <button className="table-field" id="name" onClick={handleTableSort}  >
-                Name<img src={arrow} height={10} width={10} alt="toggle arrow" data-toggle={sortStatus(sortType, "name")} />
-              </button >
-              </th>
-            <th>
-              <button className="table-field" id="gender" onClick={handleTableSort}   >
-                Gender<img src={arrow} height={10} width={10} alt="toggle arrow" data-toggle={sortStatus(sortType, "gender")} />
+              <button className="table-field" id="name" onClick={handleTableSort}>
+                Name
+                <img src={arrow} height={10} width={10} alt="toggle arrow" data-toggle={sortStatus(sortType, "name")} />
               </button>
             </th>
             <th>
-              <button className="table-field" id="height" onClick={handleTableSort}  >
-                Height(cm)<img src={arrow} height={10} width={10} alt="toggle arrow" data-toggle={sortStatus(sortType, "height")} />
+              <button className="table-field" id="gender" onClick={handleTableSort}>
+                Gender
+                <img src={arrow} height={10} width={10} alt="toggle arrow" data-toggle={sortStatus(sortType, "gender")}
+                />
               </button>
-            </th>              
-          </tr>           
+            </th>
+            <th>
+              <button className="table-field" id="height" onClick={handleTableSort}>
+                Height(cm)
+                <img src={arrow} height={10} width={10} alt="toggle arrow" data-toggle={sortStatus(sortType,"height")} />
+              </button>
+            </th>
+          </tr>
         </thead>
-      <tbody>               
-          
-      {
-          newData.map(character => (
-            <tr key={character.name}>
-                <td>{character.name}</td>
-                <td>{character.gender}</td>
-                <td>{character.height}</td>
-            </tr>
-          ))
-        }
-          
+        <tbody>
+
+          { newData.map(character => (
+          <tr key={character.name}>
+            <td>{character.name}</td>
+            <td>{character.gender}</td>
+            <td>{character.height}</td>
+          </tr>
+          )) }
+
         </tbody>
         <tfoot>
           <tr>
-            <td><b>Total Characters:</b> {newData.length}</td>                
-            <td colSpan="2"><b>Total Height:</b> {totalHeight(newData)}</td>                      
-          </tr> 
+            <td>
+              <b>Total Characters:</b> {newData.length}</td>
+            <td colSpan="2">
+              <b>Total Height:</b> {totalHeight(newData)}</td>
+          </tr>
         </tfoot>
       </table>
     </div>
