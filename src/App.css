@@ -17,14 +17,14 @@ body{background-color: black;}
 }
 
 .movie-title{
-  font-size: 28px; 
-  color: rgb(139, 139, 23);
+  font-size: 38px; 
+  color: #ebcd24;
   font-weight: 600; 
   padding: 10px 0px;
 }
 
 .crawl{
-  color: rgb(139, 139, 23);
+  color: rgba(245, 218, 86, 0.7);
   font-size: 20px; 
 }
 
@@ -76,7 +76,7 @@ td {
   padding: 1rem
 }
 
-thead tr {
+thead tr, tfoot tr {
   background-color: rgb(32, 30, 5);
   padding-bottom: 5px
 }
@@ -150,9 +150,11 @@ th img{
 .scrolling-text {
   animation: scroll 15s linear 0s;
   position: absolute;
+  z-index: 1;
   top: 50%;
-  margin: 0px 20px; 
-  text-align: center
+  width: 90%;
+  text-align: center;
+
 }
 
 
@@ -163,4 +165,45 @@ th img{
     100% {
         top: -20%;
     }
+}
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  margin: 100px auto;
+  background-color: rgb(226, 223, 33);
+  border-radius: 100%;
+  -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-scaleout {
+  0% {
+    -webkit-transform: scale(0)
+  }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+@keyframes sk-scaleout {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+.error_msg{
+  font-size: 20px;
+  color: #ebcd24;
+  margin-bottom: 20px;
+  z-index: 3;
+  position: relative;
+  
 }

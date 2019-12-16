@@ -9,7 +9,6 @@ const SortableTable  = ({data, movie}) => {
   const gendersToArray = useRef([]);
   let [defaultGenderOption, setdefaultGenderOption] = useState("all");
 
-
   
   useEffect(() => { 
     data.map((item) => {
@@ -68,8 +67,7 @@ const SortableTable  = ({data, movie}) => {
         }
         
       </select>
-    </div>             
-
+    </div> 
          
         <table>
           <thead>
@@ -91,22 +89,25 @@ const SortableTable  = ({data, movie}) => {
               </th>              
             </tr>           
           </thead>
-          <tbody>               
+        <tbody>               
             
           {
-                        newData.map(character => (
-                            <tr key={character.name}>
-                                <td>{character.name}</td>
-                                <td>{character.gender}</td>
-                                <td>{character.height}</td>
-                            </tr>
-                        ))
-                    }
-            <tr>
-              <td><b>Total Characters:</b> {newData.length}</td>                
-              <td colSpan="2"><b>Total Height:</b> {totalHeight(newData)}</td>                      
-            </tr>                               
+              newData.map(character => (
+                  <tr key={character.name}>
+                      <td>{character.name}</td>
+                      <td>{character.gender}</td>
+                      <td>{character.height}</td>
+                  </tr>
+              ))
+          }
+            
           </tbody>
+          <tfoot>
+              <tr>
+                <td><b>Total Characters:</b> {newData.length}</td>                
+                <td colSpan="2"><b>Total Height:</b> {totalHeight(newData)}</td>                      
+              </tr> 
+              </tfoot>
         </table>
       </div>
     
