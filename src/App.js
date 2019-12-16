@@ -4,8 +4,6 @@ import MovieDropDown from './components/MovieDropdown'
 import SortableTable from './components/SortableTable'
 import MovieIntro from './components/MovieIntro'
 import Logo from './assets/logo.png'
-
-
 import './App.css';
 
 
@@ -19,22 +17,19 @@ function App() {
   
  
   useEffect(() => {
-   
-    let allMovies=moviesByDate.map((movie)=>{
-    return movie.title})
-
-    const timeoutId = setTimeout(() => {
+    const timeout = setTimeout(() => {
       if (selectedMovie.current) {
         setShowIntro(false)
       }
-    }, 3000);
+    }, 2000);
     return () => {
-      clearTimeout(timeoutId);
+      clearTimeout(timeout);
     };
 
 
   }, [selectedMovie, isLoadingCharacters, characters])
-  
+
+
   const handleMovieSelection = (e) => {
     const selectedMovieIndex = e.target.value;
     const movie= moviesByDate[selectedMovieIndex ];     
@@ -50,7 +45,8 @@ function App() {
         (hasError || fetchCharacterError) && (<div className="error_msg">Oops...an error occured. Try again </div>)
       }       
       {showIntro ?< MovieIntro data={selectedMovie.current ? selectedMovie.current: []} />: ""}
-     {!showIntro && (<div className="logo"><img src={Logo} alt="star-wars-logo" /></div>)}
+
+      {!showIntro && (<div className="logo"><img src={Logo} alt="star-wars-logo" /></div>)}
       {isLoaded ?         
       <MovieDropDown 
       data={moviesByDate}
