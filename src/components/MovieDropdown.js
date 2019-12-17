@@ -5,10 +5,10 @@ const MovieDropDown = ({ data, onChange, value}) => {
     
       return (
         <div className="select-box" >
-          <select onChange={onChange} value={value.title} > 
+          <select onChange={onChange} value={value} > 
             <option value="Select"  disabled>Select a Movie ...</option>           
             {data.map((movie, index)=>     
-              <option key={index} value={index}> {movie.title} </option>
+              <option key={index} value={movie.title}> {movie.title} </option>
             )
             }                    
           </select>

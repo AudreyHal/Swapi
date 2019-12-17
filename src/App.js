@@ -21,7 +21,7 @@ function App() {
       if (selectedMovie.current) {
         setShowIntro(false)
       }
-    }, 2000);
+    }, 3000);
     return () => {
       clearTimeout(timeout);
     };
@@ -31,8 +31,9 @@ function App() {
 
 
   const handleMovieSelection = (e) => {
-    const selectedMovieIndex = e.target.value;
-    const movie= moviesByDate[selectedMovieIndex ];     
+    const selectedTitle = e.target.value;
+    const movie = moviesByDate.find(movie => movie.title === selectedTitle);
+    // const movie= moviesByDate[selectedMovieIndex ];     
     selectedMovie.current = movie;
     setShowIntro(true);  
   }
@@ -54,7 +55,7 @@ function App() {
             (<MovieDropDown 
             data={moviesByDate}
             onChange={handleMovieSelection}
-            value={selectedMovie.current ? selectedMovie.current.title : "Select a Movie"}
+            value={selectedMovie.current ? selectedMovie.current.title : "Select"}
             />)
           : 
             (<div id="Loader" className="spinner"></div>)

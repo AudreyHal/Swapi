@@ -109,7 +109,7 @@ th img {
 }
 
 .scrolling-text {
-  animation: scroll 6s linear 0s;
+  animation: scroll 6s linear infinite ;
   position: absolute;
   text-align: center;
   z-index: 1;
