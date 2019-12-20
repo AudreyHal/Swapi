@@ -18,7 +18,10 @@ export const sortStatus = (sortType, field) => {
 export const sortAsc=(characters, column)=>{   
   let asc_characters;
   if (column === "height") {
-   asc_characters= characters.sort((a, b)=> parseInt(a.height) - parseInt(b.height));
+   asc_characters= characters.sort((a, b)=>{
+    if(isNaN(parseInt(a.height) )){return 1} 
+    if(isNaN(parseInt(b.height) )){return -1} 
+    return parseInt(a.height, 10) - parseInt(b.height, 10)});
   }
    else {
     asc_characters=characters.sort((a, b)=> a[column].localeCompare(b[column]));      

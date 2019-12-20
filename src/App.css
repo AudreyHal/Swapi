@@ -113,13 +113,13 @@ th img {
   position: absolute;
   text-align: center;
   z-index: 1;
-  top: 50%;
+  top: 70%;
   width: 90%;
 }
 
 @keyframes scroll {
   0% {
-    top: 50%;
+    top: 70%;
   }
   100% {
     top: -20%;

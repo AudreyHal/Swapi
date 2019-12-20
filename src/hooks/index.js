@@ -37,7 +37,7 @@ export const useSelectedMovie = ({
   const [previousSelections, updatePreviousSelections] = useState([]);
   const [fetchCharacterError, setFetchCharacterError] = useState(false);
   const charactersUrl = selected ? selected.characters : [];
-  let previousSelection;
+  let previousSelection; 
 
 
   useEffect(() => {
